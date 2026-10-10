@@ -319,6 +319,11 @@ final class WMFAppViewController: UITabBarController, AppTabBarDelegate {
     private var siteURL: URL? {
         return dataStore.primarySiteURL
     }
+    
+    /// Tab selected on launch.
+    /// This is used in `configureTabController`  to open `.places` tab on app start.
+    /// Change to `.main` to restore previous behaviour.
+    private let launchTab: WMFAppTabType = .places
 
     // MARK: - Setup
 
@@ -408,8 +413,8 @@ final class WMFAppViewController: UITabBarController, AppTabBarDelegate {
         if shouldOpenOnSearch && selectedIndex != WMFAppTabType.search.rawValue {
             selectedIndex = WMFAppTabType.search.rawValue
             searchTabViewController.makeSearchBarBecomeFirstResponder()
-        } else if selectedIndex != WMFAppTabType.main.rawValue {
-            selectedIndex = WMFAppTabType.main.rawValue
+        } else if selectedIndex != launchTab.rawValue {
+            selectedIndex = launchTab.rawValue
         }
     }
 
